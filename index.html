@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bloch Sphere Qubit Simulator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="explanation-panel" aria-live="polite">
+        <div>
+          <p class="eyebrow">Current operation</p>
+          <h2 id="explanationTitle">Initial state</h2>
+        </div>
+        <p id="explanationText">
+          The qubit starts at |0>, shown by the red vector on the +z axis of the Bloch sphere.
+        </p>
+      </section>
+
+      <section class="simulator" aria-label="Bloch sphere qubit simulator">
+        <div class="sphere-panel">
+          <canvas id="blochCanvas" width="720" height="720" aria-label="Bloch sphere visualization"></canvas>
+        </div>
+
+        <aside class="control-panel">
+          <div class="panel-header">
+            <p class="eyebrow">Qubit state</p>
+            <h1>Bloch Sphere</h1>
+          </div>
+
+          <div class="state-card">
+            <div>
+              <span class="label">State vector</span>
+              <strong id="stateVector">|0&gt;</strong>
+            </div>
+            <div>
+              <span class="label">Bloch vector</span>
+              <strong id="blochVector">(0.00, 0.00, 1.00)</strong>
+            </div>
+            <div class="angle-readout">
+              <div>
+                <span class="label">Theta</span>
+                <strong id="thetaValue">0.0&deg;</strong>
+              </div>
+              <div>
+                <span class="label">Phi</span>
+                <strong id="phiValue">0.0&deg;</strong>
+              </div>
+            </div>
+            <div class="probabilities">
+              <div>
+                <span class="label">P(|0&gt;)</span>
+                <meter id="probZeroMeter" min="0" max="1" value="1"></meter>
+                <strong id="probZero">100%</strong>
+              </div>
+              <div>
+                <span class="label">P(|1&gt;)</span>
+                <meter id="probOneMeter" min="0" max="1" value="0"></meter>
+                <strong id="probOne">0%</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="preset-section">
+            <h2>Preset States</h2>
+            <div class="preset-grid">
+              <button data-preset="zero">|0&gt;</button>
+              <button data-preset="one">|1&gt;</button>
+              <button data-preset="plus">|+&gt;</button>
+              <button data-preset="minus">|-&gt;</button>
+              <button data-preset="iplus">|i+&gt;</button>
+              <button data-preset="iminus">|i-&gt;</button>
+            </div>
+          </div>
+
+          <div class="gate-section">
+            <h2>Apply Gates</h2>
+            <div class="gate-grid">
+              <button data-gate="X" title="Pauli-X bit flip">X</button>
+              <button data-gate="Y" title="Pauli-Y bit and phase flip">Y</button>
+              <button data-gate="Z" title="Pauli-Z phase flip">Z</button>
+              <button data-gate="H" title="Hadamard superposition">H</button>
+              <button data-gate="S" title="S phase gate">S</button>
+              <button data-gate="T" title="T phase gate">T</button>
+            </div>
+          </div>
+
+          <div class="rotation-section">
+            <h2>Rotate</h2>
+            <div class="rotation-controls">
+              <button data-rotate="rx">Rx 15&deg;</button>
+              <button data-rotate="ry">Ry 15&deg;</button>
+              <button data-rotate="rz">Rz 15&deg;</button>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="resetButton" class="secondary">Reset</button>
+            <button id="randomButton" class="secondary">Random State</button>
+            <button id="measureButton" class="secondary">Measure</button>
+            <button id="undoButton" class="secondary">Undo</button>
+          </div>
+
+          <div class="circuit">
+            <h2>Mini Circuit</h2>
+            <div id="circuitStrip" class="circuit-strip" aria-live="polite">
+              <span class="wire-state">|0&gt;</span>
+              <span class="wire"></span>
+            </div>
+          </div>
+
+          <div class="history">
+            <h2>Gate History</h2>
+            <ol id="historyList" aria-live="polite"></ol>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="main.js"></script>
+  </body>
+</html>
